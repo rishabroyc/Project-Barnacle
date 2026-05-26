@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as WisdomRouteImport } from './routes/wisdom'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as OnboardingRouteImport } from './routes/onboarding'
 import { Route as ChatRouteImport } from './routes/chat'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const WisdomRoute = WisdomRouteImport.update({
   id: '/wisdom',
   path: '/wisdom',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProfileRoute = ProfileRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/chat': typeof ChatRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wisdom': typeof WisdomRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/chat': typeof ChatRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wisdom': typeof WisdomRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/chat': typeof ChatRoute
   '/onboarding': typeof OnboardingRoute
   '/profile': typeof ProfileRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/wisdom': typeof WisdomRoute
 }
 export interface FileRouteTypes {
@@ -80,9 +89,17 @@ export interface FileRouteTypes {
     | '/chat'
     | '/onboarding'
     | '/profile'
+    | '/sitemap.xml'
     | '/wisdom'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/brommunity' | '/chat' | '/onboarding' | '/profile' | '/wisdom'
+  to:
+    | '/'
+    | '/brommunity'
+    | '/chat'
+    | '/onboarding'
+    | '/profile'
+    | '/sitemap.xml'
+    | '/wisdom'
   id:
     | '__root__'
     | '/'
@@ -90,6 +107,7 @@ export interface FileRouteTypes {
     | '/chat'
     | '/onboarding'
     | '/profile'
+    | '/sitemap.xml'
     | '/wisdom'
   fileRoutesById: FileRoutesById
 }
@@ -99,6 +117,7 @@ export interface RootRouteChildren {
   ChatRoute: typeof ChatRoute
   OnboardingRoute: typeof OnboardingRoute
   ProfileRoute: typeof ProfileRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   WisdomRoute: typeof WisdomRoute
 }
 
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/wisdom'
       fullPath: '/wisdom'
       preLoaderRoute: typeof WisdomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/profile': {
@@ -155,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChatRoute: ChatRoute,
   OnboardingRoute: OnboardingRoute,
   ProfileRoute: ProfileRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   WisdomRoute: WisdomRoute,
 }
 export const routeTree = rootRouteImport
