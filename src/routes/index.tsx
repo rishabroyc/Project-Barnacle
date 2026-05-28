@@ -162,7 +162,7 @@ function Home() {
         {/* Choose Wingman */}
         <section>
           <h3 className="text-[10px] font-bold text-bro-slate uppercase tracking-widest mb-3">
-            Switch Wingman
+            Switch your Bro
           </h3>
           <div className="grid grid-cols-2 gap-2.5">
             {WINGMEN.map((w) => (
