@@ -4,6 +4,7 @@ import { PhoneShell } from "@/components/PhoneShell";
 import { BroHeader } from "@/components/BroHeader";
 import { Flame, Share2, ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 import { useBroType } from "@/hooks/use-bro-type";
+import { useMainClass } from "@/lib/viewport";
 import { BRO_TYPE_INFO } from "@/lib/bro-type";
 import type { BroType } from "@/lib/ai";
 
@@ -61,6 +62,7 @@ export function Home() {
   const navigate = useNavigate();
   const { broType, setBroType, loaded } = useBroType();
   const { chatCount, streak, weekDots } = useStats();
+  const mainClass = useMainClass();
   const [wisdomIdx] = useState(() => Math.floor(Math.random() * WISDOM.length));
 
   // Redirect to onboarding if no bro type set
@@ -76,7 +78,7 @@ export function Home() {
     <PhoneShell>
       <BroHeader title="BROPHET" subtitle={streak > 0 ? `${streak}-day streak 🔥` : "Day 1 — lock in"} />
 
-      <main className="flex-1 px-5 space-y-5 animate-fade-in pb-4">
+      <main className={mainClass}>
 
         {/* Hero CTA */}
         <section className="relative bg-gradient-bro rounded-3xl p-6 overflow-hidden shadow-bro glow-bro">

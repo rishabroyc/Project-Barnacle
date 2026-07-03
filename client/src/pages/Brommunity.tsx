@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PhoneShell } from "@/components/PhoneShell";
 import { BroHeader } from "@/components/BroHeader";
+import { useMainClass } from "@/lib/viewport";
 import { Heart, MessageCircle, Share2, Plus } from "lucide-react";
 
 type Tag = "All" | "Broblem" | "Win" | "Wisdom" | "Hyped";
@@ -73,6 +74,7 @@ const FILTERS: { label: string; value: Tag }[] = [
 export function Brommunity() {
   const [active, setActive] = useState<Tag>("All");
   const [liked, setLiked] = useState<Set<number>>(new Set());
+  const mainClass = useMainClass("space-y-4");
 
   const filtered = active === "All"
     ? POSTS
@@ -89,7 +91,7 @@ export function Brommunity() {
     <PhoneShell>
       <BroHeader title="BROMMUNITY" subtitle="Anonymous · Bros worldwide" />
 
-      <main className="flex-1 px-5 space-y-4 animate-fade-in pb-4">
+      <main className={mainClass}>
 
         {/* Filter tabs */}
         <div className="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1 no-scrollbar">

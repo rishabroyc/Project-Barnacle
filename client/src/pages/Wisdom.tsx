@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PhoneShell } from "@/components/PhoneShell";
 import { BroHeader } from "@/components/BroHeader";
+import { useMainClass } from "@/lib/viewport";
 import { Share2, Heart, Bookmark } from "lucide-react";
 
 const QUOTES = [
@@ -72,11 +73,13 @@ export function Wisdom() {
   const toggleLike = (i: number) =>
     setLiked((prev) => { const n = new Set(prev); n.has(i) ? n.delete(i) : n.add(i); return n; });
 
+  const mainClass = useMainClass("space-y-4");
+
   return (
     <PhoneShell>
       <BroHeader title="BRO WISDOM" subtitle="Bro Bono · Free for the people" />
 
-      <main className="flex-1 px-5 space-y-4 animate-fade-in pb-4">
+      <main className={mainClass}>
         {QUOTES.map((q, i) => (
           <article
             key={i}
