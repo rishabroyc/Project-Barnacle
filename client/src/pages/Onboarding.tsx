@@ -2,10 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import { QUESTIONS, computeBroType, BRO_TYPE_INFO } from "@/lib/bro-type";
+import { useViewport } from "@/lib/viewport";
 import type { BroType } from "@/lib/ai";
 
 export function Onboarding() {
   const navigate = useNavigate();
+  const { mode } = useViewport();
+  const cardWidth = mode === "desktop" ? "max-w-2xl" : "max-w-sm";
   const total = QUESTIONS.length;
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<(number | null)[]>(Array(total).fill(null));
@@ -45,7 +48,7 @@ export function Onboarding() {
     const info = BRO_TYPE_INFO[result];
     return (
       <div className="min-h-screen bg-surface flex flex-col items-center justify-center px-6 py-12">
-        <div className="w-full max-w-sm animate-scale-in">
+        <div className={`w-full ${cardWidth} animate-scale-in`}>
           {/* Badge */}
           <div className="flex justify-center mb-6">
             <div className={`size-28 rounded-full bg-linear-to-br ${info.gradient} flex items-center justify-center text-5xl shadow-bro glow-bro`}>
@@ -93,7 +96,7 @@ export function Onboarding() {
 
   return (
     <div className="min-h-screen bg-surface flex flex-col">
-      <div className="max-w-sm mx-auto w-full flex flex-col flex-1 px-6 py-8">
+      <div className={`${cardWidth} mx-auto w-full flex flex-col flex-1 px-6 py-8`}>
         {/* Top bar */}
         <div className="flex items-center gap-3 mb-8">
           {step > 0 ? (

@@ -4,6 +4,7 @@ import { PhoneShell } from "@/components/PhoneShell";
 import { BroHeader } from "@/components/BroHeader";
 import { Flame, Trophy, Users, Shield, Sparkles, MessageCircle, ChevronRight } from "lucide-react";
 import { useBroType } from "@/hooks/use-bro-type";
+import { useMainClass } from "@/lib/viewport";
 import { BRO_TYPE_INFO } from "@/lib/bro-type";
 
 function useProfileStats() {
@@ -65,6 +66,7 @@ const NEXT_STEPS = [
 export function Profile() {
   const { broType, loaded } = useBroType();
   const { chatCount, streak, joinDays, achievements } = useProfileStats();
+  const mainClass = useMainClass();
   const info = loaded ? BRO_TYPE_INFO[broType] : null;
 
   const earned = ACHIEVEMENT_DEFS.filter((a) => achievements.includes(a.id));
@@ -74,7 +76,7 @@ export function Profile() {
     <PhoneShell>
       <BroHeader title="YOUR BRO" subtitle={`Day ${joinDays} of the journey`} />
 
-      <main className="flex-1 px-5 space-y-5 animate-fade-in pb-4">
+      <main className={mainClass}>
 
         {/* Bro Type Card */}
         {info && loaded && (

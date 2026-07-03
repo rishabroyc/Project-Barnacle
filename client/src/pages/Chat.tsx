@@ -4,6 +4,7 @@ import { ArrowLeft, Send, Sparkles, Loader2 } from "lucide-react";
 import { sendMessage, BRO_GREETINGS, type ChatMessage } from "@/lib/ai";
 import { BRO_TYPE_INFO } from "@/lib/bro-type";
 import { useBroType } from "@/hooks/use-bro-type";
+import { useViewport } from "@/lib/viewport";
 import { getSessionId } from "@/lib/session";
 
 const QUICK_PROMPTS = [
@@ -38,6 +39,7 @@ function recordActivity() {
 
 export function Chat() {
   const { broType, loaded } = useBroType();
+  const { mode } = useViewport();
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -102,7 +104,7 @@ export function Chat() {
 
   return (
     <div className="min-h-screen bg-surface">
-      <div className="max-w-md mx-auto bg-card min-h-screen flex flex-col">
+      <div className={`${mode === "desktop" ? "max-w-3xl" : "max-w-md"} mx-auto bg-card min-h-screen flex flex-col`}>
 
         {/* Header */}
         <header className="px-5 pt-6 pb-4 flex items-center gap-3 border-b border-border">
